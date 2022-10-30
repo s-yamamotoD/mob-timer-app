@@ -17,7 +17,6 @@ module.exports = {
     "vue/multi-word-component-names": 0,
     "comma-dangle": ["error", "always-multiline"],
     "no-extra-semi": "off",
-    "space-before-function-paren": ["error", "always"],
     "vue/html-indent": ["error", 2],
   },
-};
+}
