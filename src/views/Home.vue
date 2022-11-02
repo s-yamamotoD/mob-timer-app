@@ -19,6 +19,11 @@
     ></MinuteSettingBtn>
 
     <div>{{ formatTimer }}</div>
+
+    <v-btn @click="startTimer">Start Session</v-btn>
+    <v-btn v-if="isTimer" @click="isTimerStop = !isTimerStop">{{
+      timerStopLabel
+    }}</v-btn>
   </v-main>
 </template>
 
@@ -36,6 +41,8 @@ export default {
 
   data: () => ({
     timer: DEFAULT_TIMER,
+    isTimer: false,
+    isTimerStop: false,
   }),
 
   computed: {
@@ -44,11 +51,19 @@ export default {
       const second = this.timer % 60
       return `${minute}:${second}`
     },
+
+    timerStopLabel() {
+      return this.isTimerStop ? "Pause" : "Continue"
+    },
   },
 
   methods: {
     setTimer(minute) {
       this.timer = minute
+    },
+
+    startTimer() {
+      this.isTimer = true
     },
   },
 }
