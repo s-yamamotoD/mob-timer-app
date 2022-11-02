@@ -4,6 +4,7 @@
     <MinuteSettingBtn
       left-label="Mob timer"
       right-label="minutes"
+      @change="setTimer"
     ></MinuteSettingBtn>
     <MinuteSettingBtn
       :default-minute="5"
@@ -14,18 +15,36 @@
       left-label="Coffee break"
       right-label="minutes"
     ></MinuteSettingBtn>
+    <div>{{ formatTimer }}</div>
   </v-main>
 </template>
 
 <script>
 import MinuteSettingBtn from "@/components/MinuteSettingBtn"
+
+const DEFAULT_TIMER = 1500
+
 export default {
   name: "Home",
+
   components: {
     MinuteSettingBtn,
   },
+
   data: () => ({
-    //
+    timer: DEFAULT_TIMER,
   }),
+
+  computed: {
+    formatTimer() {
+      return this.timer / 60
+    },
+  },
+
+  methods: {
+    setTimer(minute) {
+      this.timer = minute
+    },
+  },
 }
 </script>
