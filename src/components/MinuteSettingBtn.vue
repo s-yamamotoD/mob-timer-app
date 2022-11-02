@@ -55,7 +55,7 @@ export default {
     },
 
     decrementMinute() {
-      this.minute += 1
+      this.minute -= 1
       this.$emit("change", this.convertSecToMin(this.minute))
     },
 
