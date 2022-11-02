@@ -6,15 +6,18 @@
       right-label="minutes"
       @change="setTimer"
     ></MinuteSettingBtn>
+
     <MinuteSettingBtn
       :default-minute="5"
       left-label="Break after"
       right-label="typists (10 minutes)"
     ></MinuteSettingBtn>
+
     <MinuteSettingBtn
       left-label="Coffee break"
       right-label="minutes"
     ></MinuteSettingBtn>
+
     <div>{{ formatTimer }}</div>
   </v-main>
 </template>
@@ -37,7 +40,9 @@ export default {
 
   computed: {
     formatTimer() {
-      return this.timer / 60
+      const minute = this.timer / 60
+      const second = this.timer % 60
+      return `${minute}:${second}`
     },
   },
 
