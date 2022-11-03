@@ -21,10 +21,11 @@
     <div>{{ formatTimer }}</div>
 
     <v-btn v-if="!isTimer" @click="startTimer">Start Session</v-btn>
-    <v-btn v-if="isTimer" @click="isTimerStop = !isTimerStop">{{
-      timerStopLabel
-    }}</v-btn>
-    <v-btn v-if="isTimer" @click="resetTimer">Reset Mob Session</v-btn>
+    <div v-if="isTimer">
+      <v-btn v-if="!isTimerStop" @click="isTimerStop = true">Pause</v-btn>
+      <v-btn v-if="isTimerStop" @click="isTimerStop = false">Continue</v-btn>
+      <v-btn @click="resetTimer">Reset Mob Session</v-btn>
+    </div>
   </v-main>
 </template>
 
