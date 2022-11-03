@@ -62,9 +62,15 @@ export default {
     },
 
     createIntervalTimer() {
+      if (this.timerID) return
       this.timerID = setInterval(() => {
         this.timer -= 1
       }, 1000)
+    },
+
+    clearIntervalTimer() {
+      clearInterval(this.timerID)
+      this.timerID = null
     },
 
     startTimer() {
@@ -74,7 +80,7 @@ export default {
 
     stopTimer() {
       this.isTimerStop = true
-      clearInterval(this.timerID)
+      this.clearIntervalTimer()
     },
 
     continueTimer() {
@@ -86,7 +92,7 @@ export default {
       this.timer = DEFAULT_TIMER
       this.isTimer = false
       this.isTimerStop = false
-      clearInterval(this.timerID)
+      this.clearIntervalTimer()
     },
   },
 }
