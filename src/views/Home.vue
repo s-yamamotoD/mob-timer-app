@@ -20,10 +20,11 @@
 
     <div>{{ formatTimer }}</div>
 
-    <v-btn @click="startTimer">Start Session</v-btn>
+    <v-btn v-if="!isTimer" @click="startTimer">Start Session</v-btn>
     <v-btn v-if="isTimer" @click="isTimerStop = !isTimerStop">{{
       timerStopLabel
     }}</v-btn>
+    <v-btn v-if="isTimer" @click="resetTimer">Reset Mob Session</v-btn>
   </v-main>
 </template>
 
@@ -64,6 +65,12 @@ export default {
 
     startTimer() {
       this.isTimer = true
+    },
+
+    resetTimer() {
+      this.timer = DEFAULT_TIMER
+      this.isTimer = false
+      this.isTimerStop = false
     },
   },
 }
