@@ -50,8 +50,8 @@ export default {
 
   computed: {
     formatTimer() {
-      const minute = this.timer / 60
-      const second = this.timer % 60
+      const minute = Math.floor(this.timer / 60)
+      const second = Math.floor(this.timer % 60)
       return `${minute}:${second}`
     },
 
@@ -67,7 +67,7 @@ export default {
 
     createIntervalTimer() {
       this.timerID = setInterval(() => {
-        this.timer -= 60
+        this.timer -= 1
       }, 1000)
     },
 
