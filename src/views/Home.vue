@@ -54,10 +54,6 @@ export default {
       const second = Math.floor(this.timer % 60)
       return `${minute}:${second}`
     },
-
-    timerStopLabel() {
-      return this.isTimerStop ? "Pause" : "Continue"
-    },
   },
 
   methods: {
