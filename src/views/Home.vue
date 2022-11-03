@@ -22,8 +22,8 @@
 
     <v-btn v-if="!isTimer" @click="startTimer">Start Session</v-btn>
     <div v-if="isTimer">
-      <v-btn v-if="!isTimerStop" @click="isTimerStop = true">Pause</v-btn>
-      <v-btn v-if="isTimerStop" @click="isTimerStop = false">Continue</v-btn>
+      <v-btn v-if="!isTimerStop" @click="stopTimer">Pause</v-btn>
+      <v-btn v-if="isTimerStop" @click="continueTimer">Continue</v-btn>
       <v-btn @click="resetTimer">Reset Mob Session</v-btn>
     </div>
   </v-main>
@@ -43,6 +43,7 @@ export default {
 
   data: () => ({
     timer: DEFAULT_TIMER,
+    timerID: null,
     isTimer: false,
     isTimerStop: false,
   }),
@@ -64,14 +65,32 @@ export default {
       this.timer = minute
     },
 
+    createIntervalTimer() {
+      this.timerID = setInterval(() => {
+        this.timer -= 60
+      }, 1000)
+    },
+
     startTimer() {
       this.isTimer = true
+      this.createIntervalTimer()
+    },
+
+    stopTimer() {
+      this.isTimerStop = true
+      clearInterval(this.timerID)
+    },
+
+    continueTimer() {
+      this.isTimerStop = false
+      this.createIntervalTimer()
     },
 
     resetTimer() {
       this.timer = DEFAULT_TIMER
       this.isTimer = false
       this.isTimerStop = false
+      clearInterval(this.timerID)
     },
   },
 }
