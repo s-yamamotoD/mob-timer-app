@@ -1,24 +1,12 @@
 # mob-timer-app
-
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## TODOリスト
+### タイマー機能
+- [ ] MinuteSettingBtnコンポーネントのpropsをcomputedで取り扱えるようにする
+- [ ] 秒数が一桁の場合、０を先頭につける
+- [ ] モブタイマー設定変更後、リセットボタンを押下すると、設定がリセットされない問題の修正
+### モブプロ（ユーザ設定）機能
+- [ ] 
+### 色変更機能
+- [ ]
+### デザイン調整
+- [ ] 
