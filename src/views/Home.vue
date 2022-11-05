@@ -4,18 +4,22 @@
     <MinuteSettingBtn
       left-label="Mob timer"
       right-label="minutes"
-      @change="setTimer"
+      :value="mobTimerMinute"
+      @change-minute="updateMobTimerMinute"
     ></MinuteSettingBtn>
 
     <MinuteSettingBtn
-      :default-minute="5"
       left-label="Break after"
       right-label="typists (10 minutes)"
+      :value="breakTimerMinute"
+      @change-minute="updateBreakAfterMinute"
     ></MinuteSettingBtn>
 
     <MinuteSettingBtn
       left-label="Coffee break"
       right-label="minutes"
+      :value="coffeeBreakMinute"
+      @change-minute="updateCoffeeBreakMinute"
     ></MinuteSettingBtn>
 
     <div>{{ formatTimer }}</div>
@@ -24,7 +28,7 @@
     <div v-if="isTimer">
       <v-btn v-if="!isTimerStop" @click="stopTimer">Pause</v-btn>
       <v-btn v-if="isTimerStop" @click="continueTimer">Continue</v-btn>
-      <v-btn @click="resetTimer">Reset Mob Session</v-btn>
+      <v-btn @click="reupdateMobTimerMinute">Reset Mob Session</v-btn>
     </div>
   </v-main>
 </template>
@@ -33,6 +37,9 @@
 import MinuteSettingBtn from "@/components/MinuteSettingBtn"
 
 const DEFAULT_TIMER = 1500
+const DEFAULT_MOB_TIMER_MINUTE = 25
+const DEFAULT_BREAK_MINUTE = 5
+const DEFAULT_COFFEE_BREAK_MINUTE = 5
 
 export default {
   name: "Home",
@@ -43,6 +50,9 @@ export default {
 
   data: () => ({
     timer: DEFAULT_TIMER,
+    mobTimerMinute: DEFAULT_MOB_TIMER_MINUTE,
+    breakTimerMinute: DEFAULT_BREAK_MINUTE,
+    coffeeBreakMinute: DEFAULT_COFFEE_BREAK_MINUTE,
     timerID: null,
     isTimer: false,
     isTimerStop: false,
@@ -57,8 +67,16 @@ export default {
   },
 
   methods: {
-    setTimer(minute) {
-      this.timer = minute
+    updateMobTimerMinute(minute) {
+      this.mobTimerMinute = minute
+    },
+
+    updateBreakAfterMinute(minute) {
+      this.breakTimerMinute = minute
+    },
+
+    updateCoffeeBreakMinute(minute) {
+      this.coffeeBreakMinute = minute
     },
 
     createIntervalTimer() {
@@ -88,7 +106,7 @@ export default {
       this.createIntervalTimer()
     },
 
-    resetTimer() {
+    reupdateMobTimerMinute() {
       this.timer = DEFAULT_TIMER
       this.isTimer = false
       this.isTimerStop = false

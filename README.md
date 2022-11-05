@@ -1,7 +1,8 @@
 # mob-timer-app
 ## TODOリスト
 ### タイマー機能
-- [ ] MinuteSettingBtnコンポーネントのpropsをcomputedで取り扱えるようにする
+- [x] MinuteSettingBtnコンポーネントのpropsをcomputedで取り扱えるようにする
+- [ ] propsをcomputedで操作することで動かなくなっている箇所の修正
 - [ ] 秒数が一桁の場合、０を先頭につける
 - [ ] モブタイマー設定変更後、リセットボタンを押下すると、設定がリセットされない問題の修正
 ### モブプロ（ユーザ設定）機能

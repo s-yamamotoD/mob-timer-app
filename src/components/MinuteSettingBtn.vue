@@ -20,15 +20,13 @@
 </template>
 
 <script>
-const DEFAULT_MINUTE = 25
-
 export default {
   name: "MinuteSettingBtn",
 
   props: {
-    defaultMinute: {
+    value: {
       type: Number,
-      default: DEFAULT_MINUTE,
+      required: true,
     },
     leftLabel: {
       type: String,
@@ -41,26 +39,27 @@ export default {
   },
 
   data: () => ({
-    minute: 0,
+    //
   }),
 
-  created() {
-    this.minute = this.defaultMinute
+  computed: {
+    minute: {
+      get() {
+        return this.value
+      },
+      set(newVal) {
+        this.$emit("change-minute", newVal)
+      },
+    },
   },
 
   methods: {
     incrementMinute() {
       this.minute += 1
-      this.$emit("change", this.convertSecToMin(this.minute))
     },
 
     decrementMinute() {
       this.minute -= 1
-      this.$emit("change", this.convertSecToMin(this.minute))
-    },
-
-    convertSecToMin(second) {
-      return second * 60
     },
   },
 }
