@@ -36,10 +36,11 @@
 <script>
 import MinuteSettingBtn from "@/components/MinuteSettingBtn"
 
-const DEFAULT_TIMER = 1500
+const DEFAULT_TIMER_SECOND = 1500
 const DEFAULT_MOB_TIMER_MINUTE = 25
 const DEFAULT_BREAK_MINUTE = 5
 const DEFAULT_COFFEE_BREAK_MINUTE = 5
+const ONE_SECOND = 1
 
 export default {
   name: "Home",
@@ -49,7 +50,7 @@ export default {
   },
 
   data: () => ({
-    timer: DEFAULT_TIMER,
+    timer: DEFAULT_TIMER_SECOND,
     mobTimerMinute: DEFAULT_MOB_TIMER_MINUTE,
     breakTimerMinute: DEFAULT_BREAK_MINUTE,
     coffeeBreakMinute: DEFAULT_COFFEE_BREAK_MINUTE,
@@ -60,7 +61,7 @@ export default {
 
   computed: {
     formatTimer() {
-      const minute = Math.floor(this.timer / 60)
+      const minute = this.convertSecondToMinute(this.timer)
       const second = Math.floor(this.timer % 60)
       return `${minute}:${second}`
     },
@@ -69,6 +70,9 @@ export default {
   methods: {
     updateMobTimerMinute(minute) {
       this.mobTimerMinute = minute
+      if (!this.isTimer) {
+        this.timer = this.convertMinuteToSecond(minute)
+      }
     },
 
     updateBreakAfterMinute(minute) {
@@ -82,7 +86,7 @@ export default {
     createIntervalTimer() {
       if (this.timerID) return
       this.timerID = setInterval(() => {
-        this.timer -= 1
+        this.timer -= ONE_SECOND
       }, 1000)
     },
 
@@ -106,8 +110,16 @@ export default {
       this.createIntervalTimer()
     },
 
+    convertMinuteToSecond(minute) {
+      return minute * 60
+    },
+
+    convertSecondToMinute(second) {
+      return Math.floor(second / 60)
+    },
+
     reupdateMobTimerMinute() {
-      this.timer = DEFAULT_TIMER
+      this.timer = this.convertMinuteToSecond(this.mobTimerMinute)
       this.isTimer = false
       this.isTimerStop = false
       this.clearIntervalTimer()
